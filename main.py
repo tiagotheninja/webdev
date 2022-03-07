@@ -1,3 +1,5 @@
+# Tiago @ SmartNinja
+# 02 Março 2022
 # calculadora de idade
 
 ano_corrente = 2022
