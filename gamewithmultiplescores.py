@@ -1,14 +1,15 @@
 # Tiago @ SmartNinja
 # 07 Março 2022
 import random
+import json
+
 
 secret = random.randint(1,10)
 guess = None
 attempts = 0
 
-scorefile = open("multiplescore.txt", "r")
-for line in scorefile:
-    print("O ultimo jogador acertou na tentativa " + line)
+scorefile = open("multiplescore.json", "r")
+score_json = json.loads(scorefile.read())
 scorefile.close()
 
 while secret != guess and attempts < 3:
@@ -25,7 +26,13 @@ while secret != guess and attempts < 3:
 if secret != guess and attempts == 4:
     print("Game over, é o fim da linha! Tchauzinho")
 
-if attempts < int(scorevalue):
-    scorefile = open("multiplescore.txt", "w")
-    scorefile.write(str(attempts))
-    scorefile.close()
+playername = input("Qual o seu nome?")
+score_json["SCORES"].append({
+    "name": playername,
+    "attempts": attempts
+})
+
+
+scorefile = open("multiplescore.json", "w")
+scorefile.write(json.dumps(score_json))
+scorefile.close()
